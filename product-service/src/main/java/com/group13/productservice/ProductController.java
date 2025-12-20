@@ -15,6 +15,7 @@ import java.util.Map;
  * GET /products → Returns all products
  * GET /products/{id} → Returns a single product by id</p>
  */
+@CrossOrigin(origins = "http://localhost:8083")  // ✅ UI (order-service) buradan geliyor
 @RestController
 @RequestMapping("/products")
 public class ProductController {
