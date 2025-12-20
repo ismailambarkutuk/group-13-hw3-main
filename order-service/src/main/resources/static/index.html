@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Shopping - Order UI</title>
+</head>
+<body>
+
+<!--
+  Simple UI page for demonstrating the microservices scenario.
+  This UI triggers Order Service, which then calls Payment Service.
+-->
+
+<h2>Microservices Demo - Order UI</h2>
+
+<!-- Triggers POST /orders on the Order Service -->
+<button onclick="createOrder()">Create Order</button>
+
+<!-- Displays the server response -->
+<pre id="result"></pre>
+
+<script>
+    /**
+     * Calls Order Service to create an order.
+     * Order Service will internally call Payment Service and return combined result.
+     */
+    function createOrder() {
+        fetch("http://localhost:8083/orders", {
+            method: "POST"
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").textContent =
+                    JSON.stringify(data, null, 2);
+            })
+            .catch(error => {
+                document.getElementById("result").textContent = error;
+            });
+    }
+</script>
+
+</body>
+</html>
